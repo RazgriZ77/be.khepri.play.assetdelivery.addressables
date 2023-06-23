@@ -1,4 +1,4 @@
-﻿#if !UNTIY_IOS
+﻿#if !UNITY_IOS
 using System.IO;
 using System.Linq;
 using Khepri.PlayAssetDelivery.Editor;
