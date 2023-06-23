@@ -41,7 +41,7 @@ namespace Khepri.PlayAssetDelivery.Editor
             if (!Directory.Exists(targetPath))
                 Directory.CreateDirectory(targetPath);
 		    
-            string bundlePath = Path.Combine(targetPath, Path.GetFileNameWithoutExtension(Bundle));
+            string bundlePath = Path.Combine(targetPath, Path.GetFileNameWithoutExtension(Bundle) + ".bundle");
             if (string.IsNullOrEmpty(Bundle))
                 throw new ArgumentNullException(nameof(Bundle));
 		    

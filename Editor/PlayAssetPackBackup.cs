@@ -16,7 +16,7 @@ namespace Khepri.PlayAssetDelivery.Editor
             foreach (var assetBundlePack in packs)
                 assetBundlePack.CopyToPath(fullPath);
             
-            Debug.Log($"Backup All packs in {Addressables.BuildPath} successfully.");
+            Debug.Log($"Backup All packs to : {fullPath} successfully.");
         }
 
         [MenuItem("Google/Restore Backup Asset Packs")]
@@ -24,15 +24,16 @@ namespace Khepri.PlayAssetDelivery.Editor
         {
             var fullPath = GetFullBackupPath();
             string[] files = Directory.GetFiles(fullPath);
-            
+
+            var directory = Path.Combine(Addressables.BuildPath, "Android");
             foreach (string filePath in files)
             {
                 string fileName = Path.GetFileName(filePath);
-                string targetFilePath = Path.Combine(Addressables.BuildPath, fileName);
+                string targetFilePath = Path.Combine(directory, fileName);
                 File.Copy(filePath, targetFilePath, true);
             }
 
-            Debug.Log("Restore All backup files successfully.");
+            Debug.Log($"Restore All backup files to : {directory} successfully.");
         }
     }
 }
