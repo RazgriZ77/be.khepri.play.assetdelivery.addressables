@@ -1,10 +1,10 @@
-﻿using System.IO;
+﻿#if !UNTIY_IOS
+using System.IO;
 using System.Linq;
 using Khepri.PlayAssetDelivery.Editor;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.Build;
-using UnityEditor.Build.Reporting;
 using UnityEngine.AddressableAssets;
 using UDebug = UnityEngine.Debug;
 
@@ -12,6 +12,7 @@ using UDebug = UnityEngine.Debug;
 public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor
 {
     public override int callbackOrder => -1;
+    
     
     public override void PrepareForBuild(BuildPlayerContext buildPlayerContext)
     {
@@ -39,9 +40,9 @@ public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor
         }
         foreach (var bundle in bundles)
         {
+            PlayAssetPackBackup.Backup(bundles);
             bundle.DeleteFile();
         }
-
         UDebug.Log($"[{nameof(PlayAssetPackBundlesPreprocessor)}.{nameof(PrepareForBuild)}] Removed: \n -{string.Join("\n -", bundles.Select(bundle => bundle.Bundle))}");
     }
 }
@@ -71,4 +72,5 @@ public class PlayAssetPackBundlesPreprocessor : IPreprocessBuildWithReport
         UDebug.Log($"[{nameof(PlayAssetPackBundlesPreprocessor)}.{nameof(OnPreprocessBuild)}] Removed: \n -{string.Join("\n -", bundles.Select(bundle => bundle.Bundle))}");
     }
 }
+#endif
 #endif

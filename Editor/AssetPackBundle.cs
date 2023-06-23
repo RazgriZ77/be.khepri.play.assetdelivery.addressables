@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Google.Android.AppBundle.Editor;
 using Khepri.PlayAssetDelivery.Editor.Settings.GroupSchemas;
 using UDebug = UnityEngine.Debug;
@@ -33,6 +34,19 @@ namespace Khepri.PlayAssetDelivery.Editor
         public void DeleteFile()
         {
             File.Delete(Bundle);
+        }
+        
+        public string CopyToPath(string targetPath)
+        {
+            if (!Directory.Exists(targetPath))
+                Directory.CreateDirectory(targetPath);
+		    
+            string bundlePath = Path.Combine(targetPath, Path.GetFileNameWithoutExtension(Bundle));
+            if (string.IsNullOrEmpty(Bundle))
+                throw new ArgumentNullException(nameof(Bundle));
+		    
+            File.Copy(Bundle, bundlePath);
+            return bundlePath;
         }
     }
 }

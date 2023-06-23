@@ -63,9 +63,7 @@ namespace Khepri.PlayAssetDelivery.Editor
 			foreach (var bundle in bundles)
 			{
 				string targetPath = Path.Combine(BuildPath, bundle.Name);
-				Directory.CreateDirectory(targetPath);
-				string bundlePath = Path.Combine(targetPath, Path.GetFileNameWithoutExtension(bundle.Bundle));
-				File.Copy(bundle.Bundle, bundlePath);
+				var bundlePath = bundle.CopyToPath(targetPath);
 				assetPackConfig.AssetPacks.Add(bundle.Name, bundle.CreateAssetPack(textureCompressionFormat, bundlePath));
 			}
 			
@@ -73,6 +71,8 @@ namespace Khepri.PlayAssetDelivery.Editor
 			AssetPackConfigSerializer.SaveConfig(assetPackConfig);
 			return assetPackConfig;
 		}
+
+	   
 
 	    public static bool BuildBundleWithAssetPacks(BuildPlayerOptions buildPlayerOptions, MobileTextureSubtarget mobileTextureSubtarget, string buildPath)
 	    {
