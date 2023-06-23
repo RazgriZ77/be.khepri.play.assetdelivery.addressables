@@ -36,11 +36,7 @@ namespace Khepri.PlayAssetDelivery.Editor
             Debug.Log($"Restore All backup files to : {directory} successfully.");
             
             foreach (string filePath in files)
-            {
-                string fileName = Path.GetFileName(filePath);
-                string targetFilePath = Path.Combine(directory, fileName);
-                File.Delete(targetFilePath);
-            }
+                File.Delete(filePath);
         }
     }
 }
