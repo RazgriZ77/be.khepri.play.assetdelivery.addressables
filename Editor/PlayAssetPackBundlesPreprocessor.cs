@@ -5,14 +5,15 @@ using Khepri.PlayAssetDelivery.Editor;
 using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.Build;
+using UnityEditor.Build.Reporting;
 using UnityEngine.AddressableAssets;
 using UDebug = UnityEngine.Debug;
 
 #if UNITY_2021_2_OR_NEWER
-public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor
+public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor, IPostprocessBuildWithReport
 {
     public override int callbackOrder => -1;
-    
+  
     public override void PrepareForBuild(BuildPlayerContext buildPlayerContext)
     {
         AddressablesPlayerBuildProcessor.BuildAddressablesOverride = settings =>
@@ -39,10 +40,20 @@ public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor
         }
         foreach (var bundle in bundles)
         {
+#if !PAD_DISABLE_BACKUP
             PlayAssetPackBackup.Backup(bundles);
+#endif
             bundle.DeleteFile();
         }
         UDebug.Log($"[{nameof(PlayAssetPackBundlesPreprocessor)}.{nameof(PrepareForBuild)}] Removed: \n -{string.Join("\n -", bundles.Select(bundle => bundle.Bundle))}");
+    }
+    
+    public void OnPostprocessBuild(BuildReport report)
+    {
+#if !PAD_DISABLE_BACKUP
+        if (report.summary.platform == BuildTarget.Android && report.files.Any(file => file.path.Contains(".aab")))
+            PlayAssetPackBackup.Restore();
+#endif
     }
 }
 #else
