@@ -51,7 +51,7 @@ public class PlayAssetPackBundlesPreprocessor : BuildPlayerProcessor, IPostproce
     public void OnPostprocessBuild(BuildReport report)
     {
 #if !PAD_DISABLE_BACKUP
-        if (report.summary.platform == BuildTarget.Android && report.files.Any(file => file.path.Contains(".aab")))
+        if (report.summary.platform == BuildTarget.Android && report.GetFiles().Any(file => file.path.Contains(".aab")))
             PlayAssetPackBackup.Restore();
 #endif
     }

@@ -14,6 +14,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Debug = UnityEngine.Debug;
 
+using TextureCompressionFormat = Google.Android.AppBundle.Editor.TextureCompressionFormat;
+
 namespace Khepri.PlayAssetDelivery.Editor
 {
     public class AssetPackBuilder

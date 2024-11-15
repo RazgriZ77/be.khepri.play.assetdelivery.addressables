@@ -6,6 +6,8 @@ using UnityEditor;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
+using TextureCompressionFormat = Google.Android.AppBundle.Editor.TextureCompressionFormat;
+
 namespace Khepri.PlayAssetDelivery.Editor.Settings.GroupSchemas
 {
     [DisplayName("Play Asset Delivery")]
