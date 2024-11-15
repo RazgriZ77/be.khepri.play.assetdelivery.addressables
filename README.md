@@ -7,25 +7,18 @@ In short this package provides support for Googles' Play Asset Delivery (https:/
 
 Before adding the package to your project you will need to install Google's Play Asset Delivery Package from https://github.com/google/play-unity-plugins/releases
 
-Next you can add the package to your project via the `OpenUPM`, the `Package Manager` or by manually editing the `manifest.json`
-
-### Via OpenUPM
-
-1. https://openupm.com/docs/getting-started
-2. `openupm add be.khepri.play.assetdelivery.addressables -f`
-
-note: `-f` is required as `openupm` can not install dependencies which are in a different scopedRegistry. 
+Next you can add the package to your project via the the `Package Manager` or by manually editing the `manifest.json`
 
 ### Via Package Manager
 
 1. Press ` + `
 2. Select `Add package from git URL...` 
-3. url: `https://github.com/jelte/be.khepri.play.assetdelivery.addressables.git#1.0.0`
+3. url: `[https://github.com/RazgriZ77/be.khepri.play.assetdelivery.addressables.git]`
 
 ### Via manifest.json
 
 ```json
-   "be.khepri.play.assetdelivery.addressables": "https://github.com/jelte/be.khepri.play.assetdelivery.addressables.git#1.0.0",
+   "be.khepri.play.assetdelivery.addressables": "https://github.com/RazgriZ77/be.khepri.play.assetdelivery.addressables.git",
 ```
 
 ##  Configure Groups
